@@ -1,0 +1,62 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+
+    <!-- GST Form (shown only when Add is clicked) -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title">GST Master</h4>
+            <p class="card-category">Enter GST and company details</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="gstForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Amount (₹)</label>
+                    <input type="number" class="form-control" formControlName="amount" placeholder="Enter amount" />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>GST Rate (%)</label>
+                    <input type="number" class="form-control" formControlName="gstRate" placeholder="Enter GST rate" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>GST Amount (₹)</label>
+                    <input type="text" class="form-control"  readonly />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Total Amount (₹)</label>
+                    <input type="text" class="form-control"  readonly />
+                  </div>
+                </div>
+              </div>       
+            
+              <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" formControlName="isActive" id="isActive" />
+                <label class="form-check-label" for="isActive">Is Active</label>
+              </div>
+
+              <!-- <button type="submit" class="btn btn-secondary" [disabled]="gstForm.invalid">Submit</button>
+              <button type="button" class="btn btn-danger" (click)="showForm = false">Cancel</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

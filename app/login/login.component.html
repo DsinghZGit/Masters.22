@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="username">Username</label>
+      <input type="text" id="username" formControlName="username" />
+      <div class="error" *ngIf="submitted && loginForm.controls['username'].invalid">
+        Username is required
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" />
+      <div class="error" *ngIf="submitted && loginForm.controls['password'].invalid">
+        Password is required
+      </div>
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+</div>
+

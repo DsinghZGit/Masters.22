@@ -1,0 +1,111 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <div class="row mb-3">
+      <div class="col-md-12 text-right">
+        <button class="btn btn-secondary" (click)="onAddClick()">Add</button>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="showForm">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title">Item Master</h4>
+            <p class="card-category">Add or update item details</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Item Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="item.itemname" placeholder="Enter item name" />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>HSN Code</label>
+                    <input type="text" class="form-control" [(ngModel)]="item.hsncode" placeholder="Enter HSN code" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Category</label>
+                    <select [(ngModel)]="item.categoryid" name="category" class="form-control">
+                      <option *ngFor="let category of Categories" [value]="category.categoryid">{{ category.categoryname }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Unit</label>
+                    <select [(ngModel)]="item.Units" name="category" class="form-control">
+                      <option *ngFor="let UNIT of Units" [value]="UNIT.unitid">{{ UNIT.unitname }}</option>
+                    </select>
+                    <!-- <ng-select [(ngModel)]="item.unitid" [ngModelOptions]="{standalone: true}" [items]="Units" bindLabel="unitname" bindValue="unitid" placeholder="Select Unit" class=""></ng-select> -->
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" class="form-control" [(ngModel)]="item.price" />
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-secondary">Submit</button>
+              <button type="button" class="btn btn-secondary ml-2" (click)="onCancel()">Cancel</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-warning">
+            <h4 class="card-title">Item List</h4>
+            <p class="card-category">Item available in the system</p>
+          </div>
+          <div class="card-body">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+              <ng-container matColumnDef="itemname">
+                <th mat-header-cell *matHeaderCellDef>Item Name</th>
+                <td mat-cell *matCellDef="let item">{{ item.itemname }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="hsncode">
+                <th mat-header-cell *matHeaderCellDef>HSN Code</th>
+                <td mat-cell *matCellDef="let item">{{ item.hsncode }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="category">
+                <th mat-header-cell *matHeaderCellDef>Category</th>
+                <td mat-cell *matCellDef="let item">{{ item.categoryid }}</td> 
+              </ng-container>
+
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef>Price</th>
+                <td mat-cell *matCellDef="let item">{{ item.price }}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>`
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+chl yaar eh te chleya baki savere dekhde jldi free ho k aa jana
+ok paji

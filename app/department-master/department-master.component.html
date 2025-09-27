@@ -1,0 +1,87 @@
+<div class="main-content">
+  <div class="container-fluid">
+    
+    <!-- Add Button -->
+    <div class="row mb-3">
+      <div class="col-md-12 text-right">
+        <button class="btn btn-secondary" (click)="showForm = true">Add</button>
+      </div>
+    </div>
+
+    <!-- Department Master Form -->
+    <div *ngIf="showForm">
+      <div class="card">
+        <div class="card-header card-header-success">
+          <h4 class="card-title">Department Master</h4>
+          <p class="card-category">Create or edit department details</p>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Department Name</label>
+                  <input type="text" class="form-control" formControlName="deptName" placeholder="Enter department name" />
+                  <div class="text-danger" *ngIf="departmentForm.get('deptName')?.touched && departmentForm.get('deptName')?.invalid">
+                    Required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Department Code</label>
+                  <input type="text" class="form-control" formControlName="deptCode" placeholder="Enter department code" />
+                  <div class="text-danger" *ngIf="departmentForm.get('deptCode')?.touched && departmentForm.get('deptCode')?.invalid">
+                    Required
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input" formControlName="isActive" id="isActive" />
+              <label class="form-check-label" for="isActive">Is Active</label>
+            </div>
+
+            <button type="submit" class="btn btn-secondary" [disabled]="departmentForm.invalid">Submit</button>
+            <button type="button" class="btn btn-danger" (click)="cancelForm()">Cancel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- User List Table (only show when form is hidden) -->
+    <div *ngIf="!showForm" class="row mt-4">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-warning">
+            <h4 class="card-title">User List</h4>
+            <p class="card-category">Users in the system</p>
+          </div>
+          <div class="card-body">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+              <ng-container matColumnDef="fname">
+                <th mat-header-cell *matHeaderCellDef>First Name</th>
+                <td mat-cell *matCellDef="let user">{{ user.fname }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="lname">
+                <th mat-header-cell *matHeaderCellDef>Last Name</th>
+                <td mat-cell *matCellDef="let user">{{ user.lname }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

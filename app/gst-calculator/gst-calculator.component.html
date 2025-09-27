@@ -1,0 +1,39 @@
+<div class="container">
+  <h1 class="title">GST Calculator</h1>
+
+  <form [formGroup]="gstForm" (ngSubmit)="calculateGST()" class="form">
+   
+    <mat-radio-group formControlName="gstMode">
+      <mat-radio-button value="exclusive">GST Exclusive</mat-radio-button>
+      <mat-radio-button value="inclusive">GST Inclusive</mat-radio-button>
+    </mat-radio-group>
+
+    <div class="form-group">
+      <label for="amount">Amount (₹)</label>
+      <input id="amount" type="number" formControlName="amount" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+      <label for="selectedGstId">Select GST Rate (%)</label>
+      <select id="selectedGstId" formControlName="selectedGstId" class="form-control" required>
+        <option value="" disabled>Select GST Rate</option>
+        <option *ngFor="let gst of gstList" [value]="gst.gstid">
+          {{ gst.gstrate }}% - {{ gst.description }}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="gstForm.invalid" class="btn btn-primary">Calculate</button>
+  </form>
+
+  <div *ngIf="gstResult !== null" class="result mt-4">
+    <p><strong>IGST:</strong> ₹{{ gstResult.igst.toFixed(2) }}</p>
+    <p><strong>CGST:</strong> ₹{{ gstResult.cgst.toFixed(2) }}</p>
+    <p><strong>Tax Amount:</strong> ₹{{ gstResult.taxAmount.toFixed(2) }}</p>
+    <p *ngIf="gstResult.beforeTaxAmount !== undefined">
+  <strong>Before Tax Amount:</strong> ₹{{ gstResult.beforeTaxAmount.toFixed(2) }}
+</p>
+
+    <p><strong>Total Amount:{{gstMode }}</strong> ₹{{ gstResult.totalAmount.toFixed(2) }}</p>
+  </div>
+</div>
